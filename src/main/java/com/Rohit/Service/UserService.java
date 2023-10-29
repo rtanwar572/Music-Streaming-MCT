@@ -119,7 +119,7 @@ public class UserService {
     }
 
     public String removeMusic(String adminMail, String adminToken, Integer musicId) {
-        if (authToken.Authenticate(adminMail,adminToken)){
+        if (authToken.Authenticate(adminMail,adminToken) && adminMail.contains("@admin.com")){
             return musicService.delMusic(musicId);
         }
         return "UnAuthorized Access !!";
@@ -233,7 +233,11 @@ public class UserService {
     }
 
     public List<User> getAllUsers(String adminMail, String adminToken) {
-        return iUserRepo.findByUserRole(Role.USER);
+        if (authToken.Authenticate(adminMail,adminToken) && adminMail.contains("@admin.com")){
+            return iUserRepo.findByUserRole(Role.USER);
+        }
+        return null;
+
     }
 
     public String playSongForUser(Music playSong,String email,String tokVal) {

@@ -35,7 +35,7 @@ public class AdminController {
     public String addMusic(@PathVariable String adminMail,@PathVariable String adminToken,@RequestBody Music music){
         return userService.addMusic(adminMail,adminToken,music);
     }
-    //both user and admin cann fetch all songs..
+    //both user and admin can fetch all songs..
     @GetMapping("/allSongs/email/{adminMail}/tokenVal/{adminToken}")
     public List<Music> getMusics(@PathVariable String adminMail, @PathVariable String adminToken){
         return userService.getMusics(adminMail,adminToken);
